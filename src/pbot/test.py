@@ -1,9 +1,11 @@
 import threading
 
 from core import RoleCtx, append_msg
+from agents import BaseAgent, singleton
 from utils import pretty_print_nested
 
-class MyAgent:
+@singleton
+class MyAgent(BaseAgent):
     def __init__(self):
         self.msgs = []
 
@@ -14,8 +16,8 @@ class MyAgent:
         with RoleCtx('user'):
             yield user_inputs
 
-agent = MyAgent()
 def worker():
+    agent = MyAgent()
     msgs = agent.greeting('You are pbot', 'hello')
     print(pretty_print_nested(msgs))
 
