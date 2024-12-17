@@ -1,3 +1,5 @@
+import pdb
+from agents import ThreadSafeList
 
 def pretty_print_nested(obj, indent=0, omit_limit=100):
     half = int(omit_limit / 2)
@@ -7,7 +9,7 @@ def pretty_print_nested(obj, indent=0, omit_limit=100):
             return obj[:half] + '...' + obj[-half:]
         else:
             return obj
-    elif isinstance(obj, list):
+    elif isinstance(obj, list) or isinstance(obj, ThreadSafeList):
         if not obj:
             return '[]'
         elements = [pretty_print_nested(elem, indent + 4) for elem in obj]

@@ -1,14 +1,11 @@
 import threading
 
 from core import RoleCtx, append_msg
-from agents import BaseAgent, singleton
 from utils import pretty_print_nested
+from agents import singleton, BaseAgent, DataParallelAgent
 
 @singleton
 class MyAgent(BaseAgent):
-    def __init__(self):
-        self.msgs = []
-
     @append_msg('msgs')
     def greeting(self, system_instructions, user_inputs):
         with RoleCtx('system'):
@@ -16,8 +13,17 @@ class MyAgent(BaseAgent):
         with RoleCtx('user'):
             yield user_inputs
 
+class MyDPAgent(DataParallelAgent):
+    @append_msg('msgs')
+    def greeting(self, system_instructions, user_inputs):
+        with RoleCtx('system'):
+            yield f"You are a helpful assistant, please follow: {system_instructions}."
+        with RoleCtx('user'):
+            yield user_inputs
+
+agent = MyDPAgent()
 def worker():
-    agent = MyAgent()
+    # agent = MyAgent()
     msgs = agent.greeting('You are pbot', 'hello')
     print(pretty_print_nested(msgs))
 
