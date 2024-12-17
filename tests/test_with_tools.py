@@ -1,7 +1,5 @@
 import sympy
-
-from tools import register_tools
-from utils import pretty_print_nested
+from pbot import *
 
 def is_lucky(x: int) -> bool:
     """Determine whether the input number is a lucky number.

@@ -1,8 +1,5 @@
 import threading
-
-from core import RoleCtx, append_msg
-from utils import pretty_print_nested
-from agents import singleton, BaseAgent, DataParallelAgent
+from pbot import *
 
 @singleton
 class MyAgent(BaseAgent):

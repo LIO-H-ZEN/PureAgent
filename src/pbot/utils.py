@@ -1,5 +1,5 @@
 import pdb
-from agents import ThreadSafeList
+from pbot.agents import ThreadSafeList
 
 def pretty_print_nested(obj, indent=0, omit_limit=100):
     half = int(omit_limit / 2)
@@ -27,3 +27,5 @@ def pretty_print_nested(obj, indent=0, omit_limit=100):
         return f'{{\n{pairs_str}\n{indent_str}}}'
     else:
         return str(obj)
+
+
